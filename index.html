@@ -24,10 +24,12 @@
   http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   
   Brief Description of Goal of Code:
-  blah, blah, blah,
+  The goal for this app was to be able to upload an image and be able to display it with a blue filter. The blue filter
+ would be from removing the red and green from the image upladed.
  
   Known Issues:
-  blah, blah, blah, blah
+  I had a lot of trouble with being able to upload the picture from my laptop to be displayed. It was mainly from issues with misplaced semicolons.Then it 
+was a bit tricky turning the image blue, but with help from  menots, I was able to complete the app.
 -->
 
  <head>
@@ -101,13 +103,14 @@
           /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
-        var canvas2=document.getElementById('dataCanvas');
-        var context2=canvas2.getContext("2d");
+        var canvas2=document.getElementById('dataCanvas'); // This is to call the 2nd canvas where the blue image will be uploaded.
+        var context2=canvas2.getContext("2d"); // This variable is to define the context to be of the 2d parameter.
         
-        var imageData = context.getImageData (0,0, 600, 500);
-        var data = imageData.data;
+        var imageData = context.getImageData (0,0, 600, 500); // Variable that brings the image data from all of the pixels from the first canvas that was defined by the previous parameters.
+        var data = imageData.data; //Variable that brings back the object/image that has the pixel data. 
         
-        for(var i=0, n=data.length; i < n; i+=4){
+        //code below changes the image's color
+        for(var i=0, n=data.length; i < n; i+=4){ //This defines the starting position of loop of the data, which is 0 and runs the loop through the pixel data. 
           data [i] = 0; //so red doesn't appear
           data [i+1] = 0; //so green doesn't appear
         

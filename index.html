@@ -47,6 +47,7 @@ was a bit tricky turning the image blue, but with help from  menots, I was able 
 
 /* detectVerticalSquash & drawImageIOSFix = are functions that are critical due to a flaw in the iPhone camera software that squishes any photos displayed on an HTML5 canvas element. https://github.com/stomita/ios-imagefile-megapixel
 */
+/* Underneath will code for the page diplay details like height, width, etc.  */
  function detectVerticalSquash(img) {
   var iw = img.naturalWidth, ih = img.naturalHeight;
   var canvas = document.createElement('canvas');
@@ -71,8 +72,8 @@ was a bit tricky turning the image blue, but with help from  menots, I was able 
   var ratio = (py / ih);
   return (ratio===0)?1:ratio;
  }
-
- function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+/* Underneath defines the function for drawImageIOSFix and variable detectVerticalSquash, which is concerned with the iPhone software */
+ function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) { 
   var vertSquashRatio = detectVerticalSquash(img);
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
  }
@@ -111,18 +112,18 @@ was a bit tricky turning the image blue, but with help from  menots, I was able 
         
         //code below changes the image's color
         for(var i=0, n=data.length; i < n; i+=4){ //This defines the starting position of loop of the data, which is 0 and runs the loop through the pixel data. 
-          data [i] = 0; //so red doesn't appear
-          data [i+1] = 0; //so green doesn't appear
+          data [i] = 0; //This input is so that red color intensity doesn't appear on the new image
+          data [i+1] = 0; //This input is so that green color intensity doesn't appear on the new image
         
         }
         
-        context2.putImageData(imageData, 0, 0); 
+        context2.putImageData(imageData, 0, 0); // Combines/carries all of the image functions together for the second image
           
         } 
        
        // end of img.onload
         
-        img.src = reader.result;
+        img.src = reader.result;// The result will display as the final image
        
         } 
      
@@ -142,6 +143,7 @@ was a bit tricky turning the image blue, but with help from  menots, I was able 
  </head>
 
  <body>
+  <!-- underneath will be for the page set up such as its header and instructions -->
   <div data-role="page">
     <div data-role="header">
     <h1>Primary Colors</h1></div><!-- /header -->
@@ -155,8 +157,10 @@ was a bit tricky turning the image blue, but with help from  menots, I was able 
       
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
+       /* This is for the first canvas */
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext("2d");
+        /* Context below is what how the first canvas will be labeled with having black Calibri 20pt font */
         context.font = '20pt Calibri';
         context.fillStyle = "black";
         context.fillText("Original image will go here", 10, 20);
@@ -164,8 +168,10 @@ was a bit tricky turning the image blue, but with help from  menots, I was able 
      
       <canvas id="dataCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
+         /* This is for the second canvas */
         var canvas2 = document.getElementById('dataCanvas');
         var context2 = canvas2.getContext("2d");
+         /* Context below is what how the second canvas will be labeled with having black Calibri 20pt font */
         context2.font = '20pt Calibri';
         context2.fillStyle = "black";
         context2.fillText("Transformed image will go here", 10, 20);
